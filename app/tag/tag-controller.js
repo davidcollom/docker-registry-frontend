@@ -42,12 +42,12 @@ angular.module('tag-controller', ['registry-services'])
           }
           // Display only some results and query details 
           $scope.displayedTags = $scope.tags.slice(($scope.tagsCurrentPage - 1) * $scope.tagsPerPage , ($scope.tagsCurrentPage ) * $scope.tagsPerPage );
-          var tmpIdx;
+          var tmpIdx = ($scope.tagsCurrentPage-1) * $scope.tagsPerPage;
           for (var idx in $scope.displayedTags){
-          	tmpIdx = parseInt(idx) + ($scope.tagsCurrentPage-1) * $scope.tagsPerPage;
             if ( result[tmpIdx ].hasOwnProperty('name') ) {
                 result[tmpIdx].details = Manifest.query({repoUser: $scope.repositoryUser, repoName: $scope.repositoryName, tagName: result[tmpIdx].name});
             }
+            tmpIdx ++;
           }
         });
       } 
